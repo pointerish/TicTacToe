@@ -1,3 +1,6 @@
+#rubocop:disable Style/GuardClause
+#rubocop:disable Layout/EmptyLineAfterGuardClause
+
 class Board
   attr_accessor :board, :turn, :game_over
 
@@ -26,7 +29,7 @@ class Board
 
   def move(move:, player:)
     @turn += 1
-    if %w(X O).include?(@board[move[0]][move[1]]) == false
+    if %w[X O].include?(@board[move[0]][move[1]]) == false
       @board[move[0]][move[1]] = player
       'Your move was a valid move!'
     else
@@ -40,7 +43,7 @@ class Board
     columns.each { |column| return true if column.all?(String) && column.all?(player) }
     if diagonal.all?(String) && diagonal.all?(player)
       return true
-    elsif diagonal.all?(String) && diagonal.all?(player)
+    elsif diagonal_rev.all?(String) && diagonal_rev.all?(player)
       return true
     else
       return false
@@ -48,3 +51,6 @@ class Board
     winning
   end
 end
+
+#rubocop:enable Style/GuardClause
+#rubocop:enable Layout/EmptyLineAfterGuardClause
