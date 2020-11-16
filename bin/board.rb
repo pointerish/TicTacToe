@@ -1,5 +1,5 @@
-#rubocop:disable Style/GuardClause
-#rubocop:disable Layout/EmptyLineAfterGuardClause
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 
 class Board
   attr_accessor :board, :turn, :game_over
@@ -38,19 +38,17 @@ class Board
   end
 
   def win?(player:)
-    winning = false
     @board.each { |row| return true if row.all?(String) && row.all?(player) }
     columns.each { |column| return true if column.all?(String) && column.all?(player) }
     if diagonal.all?(String) && diagonal.all?(player)
-      return true
+      true
     elsif diagonal_rev.all?(String) && diagonal_rev.all?(player)
-      return true
+      true
     else
-      return false
+      false
     end
-    winning
   end
 end
 
-#rubocop:enable Style/GuardClause
-#rubocop:enable Layout/EmptyLineAfterGuardClause
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
