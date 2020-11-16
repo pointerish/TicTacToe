@@ -6,8 +6,9 @@ def game_flow
   player_x = gets.chomp
   puts 'Enter name for player O: '
   player_o = gets.chomp
+  puts "Welcome to TicTacToe, #{player_x} and #{player_o}!"
   9.times do |turn| # There are only 9 possible moves until draw
-    player_turn = turn.even? ? "X" : "O"
+    player_turn = turn.even? ? 'X' : 'O'
     puts "Turn for player #{player_turn}-> Select where you want to move: "
     move_selection = gets.chomp
     puts 'Your move selection is valid!'
