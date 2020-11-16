@@ -20,31 +20,32 @@ class Board
   def move(move:, player:)
     @turn += 1
     if %w(X O).include?(@board[move[0]][move[1]])
-      "Your move was a valid move!"
       @board[move[0]][move[1]] = player
+      'Your move was a valid move!'
     else
-      "Your move is illegal since that square is already taken."
+      'Your move is illegal since that square is already taken.'
   end
 
-  def win?
+  def win?(player:)
     winning = false
     for row in rows
       for inner_row in row
-        return inner_row.all?(String)
+        return true if inner_row.all?(String) && inner_row.all?(player)
       end
     end
     for column in columns
       for inner_column in column
-        return inner_column.all?(String)
+        return true if inner_column.all?(String) && inner_column.all?(player)
       end
     end
-    if @diagonal.all?(String)
-      winning = true
-      return winning
+    if @diagonal.all?(String) && @diagonal.all?(player)
+      return true
+    elsif @diagonal.all?(String) && @diagonal.all?(player)
+      return true
     else
-      winning = @diagonal_rev.all?(String)
-      return winning
+      return false
     end
     winning
   end
 end
+
