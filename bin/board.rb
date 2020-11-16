@@ -17,9 +17,13 @@ class Board
     @diagonal_rev = [@board[0, 0], @board[1, 1], @board[2, 2]]
   end
 
-  def move(move:)
+  def move(move:, player:)
     @turn += 1
-    @board[move[0][move[1]] = 'X'
+    if %w(X O).include?(@board[move[0]][move[1]])
+      "Your move was a valid move!"
+      @board[move[0]][move[1]] = player
+    else
+      "Your move is illegal since that square is already taken."
   end
 
   def win?
