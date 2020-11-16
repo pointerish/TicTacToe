@@ -10,7 +10,8 @@ def game_flow
   9.times do |turn| # There are only 9 possible moves until draw
     player_turn = turn.even? ? 'X' : 'O'
     puts "\n\n\t\t\t\t|-|-|-|\n\t\t\t\t|-|-|-|\n\t\t\t\t|-|-|-|\n"
-    print "\n\nTurn for #{player_turn}-> Choose your move by using the numbers from 1 to 9 meaning left to right cells in descending order: "
+    print "\n\nTurn for #{player_turn}!"
+    puts 'Choose your move by using the numbers from 1 to 9 meaning left to right cells in descending order: '
     move_selection = gets.chomp
     puts "\n\nYour move selection is valid!\n\n"
     # All the board manipulation and checks happen here
