@@ -42,9 +42,9 @@ class Board
     for column in columns
       return true if column.all?(String) && column.all?(player)
     end
-    if @diagonal.all?(String) && @diagonal.all?(player)
+    if diagonal.all?(String) && diagonal.all?(player)
       return true
-    elsif @diagonal.all?(String) && @diagonal.all?(player)
+    elsif diagonal.all?(String) && diagonal.all?(player)
       return true
     else
       return false
