@@ -2,13 +2,13 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 class Board
-  attr_accessor :board, :turn, :game_over
+  attr_accessor :board
 
   def initialize
     # [[-, -, -],
     #  [-, -, -],
     #  [-, -, -]]
-    @board = Array.new(3) { Array.new(3, 0) }
+    @board = Array.new(3) { Array.new(3, '-') }
     @turn = 0
     @game_over = false
   end
@@ -38,11 +38,11 @@ class Board
   end
 
   def win?(player:)
-    @board.each { |row| return true if row.all?(String) && row.all?(player) }
-    columns.each { |column| return true if column.all?(String) && column.all?(player) }
-    if diagonal.all?(String) && diagonal.all?(player)
+    @board.each { |row| return true if row.all?(player) }
+    columns.each { |column| return true if column.all?(player) }
+    if diagonal.all?(player)
       true
-    elsif diagonal_rev.all?(String) && diagonal_rev.all?(player)
+      elsif diagonal_rev.all?(player)
       true
     else
       false
