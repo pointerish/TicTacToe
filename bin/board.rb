@@ -42,7 +42,7 @@ class Board
     columns.each { |column| return true if column.all?(player) }
     if diagonal.all?(player)
       true
-      elsif diagonal_rev.all?(player)
+    elsif diagonal_rev.all?(player)
       true
     else
       false
