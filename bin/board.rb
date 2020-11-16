@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :board, :turn, :game_over, :columns, :diagonal, :diagonal_rev
+  attr_accessor :board, :turn, :game_over
 
   def initialize
     # [[-, -, -],
@@ -36,12 +36,8 @@ class Board
 
   def win?(player:)
     winning = false
-    for row in @board
-      return true if row.all?(String) && row.all?(player)
-    end
-    for column in columns
-      return true if column.all?(String) && column.all?(player)
-    end
+    @board.each { |row| return true if row.all?(String) && row.all?(player) }
+    columns.each { |column| return true if column.all?(String) && column.all?(player) }
     if diagonal.all?(String) && diagonal.all?(player)
       return true
     elsif diagonal.all?(String) && diagonal.all?(player)
