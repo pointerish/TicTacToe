@@ -1,14 +1,11 @@
 #!/usr/bin/env ruby
 # rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Style/GuardClause
 
 require_relative '../lib/board'
 require_relative '../lib/game'
-
-
-# This global contains a Hash for easing the user-board interaction
-$user_keys = { '1' => [0, 0], '2' => [0, 1], '3' => [0, 2],
-               '4' => [1, 0], '5' => [1, 1], '6' => [1, 2],
-               '7' => [2, 0], '8' => [2, 1], '9' => [2, 2] }
 
 def show_board(board:)
   p board.board[0]
@@ -17,7 +14,10 @@ def show_board(board:)
 end
 
 def main_loop(game:, players:)
-  while !game.game_over
+  user_keys = { '1' => [0, 0], '2' => [0, 1], '3' => [0, 2],
+                '4' => [1, 0], '5' => [1, 1], '6' => [1, 2],
+                '7' => [2, 0], '8' => [2, 1], '9' => [2, 2] }
+  while game.game_over == false
     if game.turn < 9 # Only run the game if the turn is less than 9
       player_turn = game.turn.even? ? 'X' : 'O'
       player_turn_name = player_turn == 'X' ? players[0] : players[1]
@@ -32,8 +32,9 @@ def main_loop(game:, players:)
           print "Turn for #{player_turn_name}! Enter your move again: "
         end
       end
-      begin # Attempt move
-        game.move(move_choice: $user_keys[move_selection], player: player_turn)
+      begin 
+        # Attempt move
+        game.move(move_choice: user_keys[move_selection], player: player_turn)
         puts "\n\nYour move selection was #{move_selection}"
       rescue => exception # This rescues the exception raised by Game.win? if the move is illegal
         puts 'Your move is illegal since that square is already taken.'
@@ -57,7 +58,7 @@ end
 def game_flow
   board = Board.new
   game = Game.new(board: board)
-  players = Array.new
+  players = []
   puts "\n\nTic Tac Toe Game Started!\n\n"
   print 'Enter name for player X: '
   player_x = gets.chomp
@@ -75,3 +76,6 @@ end
 game_flow
 
 # rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Style/GuardClause
