@@ -14,7 +14,15 @@ def show_board(board:)
   p board.board[2]
 end
 
-def main_loop(game:, players:)
+def rematch(response:)
+  if %w[Y y].include?(response)
+    true
+  else
+    false
+  end
+end
+
+def game_loop(game:, players:)
   user_keys = { '1' => [0, 0], '2' => [0, 1], '3' => [0, 2],
                 '4' => [1, 0], '5' => [1, 1], '6' => [1, 2],
                 '7' => [2, 0], '8' => [2, 1], '9' => [2, 2] }
@@ -44,28 +52,41 @@ def main_loop(game:, players:)
       show_board(board: game.game_board)
       game.game_over = true
     elsif game.draw?
-      puts "\n\n*****A draw has been reached! Run the game again for the rematch.******"
+      show_board(board: game.game_board)
+      puts "\n\n*****A draw has been reached******\n\n"
       game.game_over = true
     end
   end
 end
 
 def game_flow
-  board = Board.new
-  game = Game.new(board: board)
-  players = []
-  puts "\n\nTic Tac Toe Game Started!\n\n"
-  print 'Enter name for player X: '
-  player_x = gets.chomp
-  players << player_x
-  print 'Enter name for player O: '
-  player_o = gets.chomp
-  players << player_o
-  puts "\n\nWelcome to TicTacToe, #{player_x} and #{player_o}!\n\n"
+  game_on = true
+  while game_on
+    board = Board.new
+    game = Game.new(board: board)
+    players = []
+    puts "\n\nTic Tac Toe Game Started!\n\n"
+    print 'Enter name for player X: '
+    player_x = gets.chomp
+    players << player_x
+    print 'Enter name for player O: '
+    player_o = gets.chomp
+    players << player_o
+    puts "\n\nWelcome to TicTacToe, #{player_x} and #{player_o}!\n\n"
 
-  puts "Choose your move by entering numbers from 1 to 9\nmeaning left to right in descending order.\n\n"
+    puts "Choose your move by entering numbers from 1 to 9\nmeaning left to right in descending order.\n\n"
 
-  main_loop(game: game, players: players)
+    game_loop(game: game, players: players)
+    print "\n\nWould you like to play again? [Y/N]: "
+    response_rematch = gets.chomp
+    if rematch(response: response_rematch)
+      game_on = true
+      puts "\n\nNew Game!"
+    else
+      puts "\n\nGoodbye!"
+      game_on = false
+    end
+  end
 end
 
 game_flow
