@@ -18,7 +18,7 @@ def main_loop(game:, players:)
   user_keys = { '1' => [0, 0], '2' => [0, 1], '3' => [0, 2],
                 '4' => [1, 0], '5' => [1, 1], '6' => [1, 2],
                 '7' => [2, 0], '8' => [2, 1], '9' => [2, 2] }
-  while game.game_over == false && game.turn < 9
+  while game.game_over == false
     player_turn = game.turn.even? ? 'X' : 'O'
     player_turn_name = player_turn == 'X' ? players[0] : players[1]
     puts "=================================\n\n"
@@ -39,15 +39,13 @@ def main_loop(game:, players:)
     rescue StandardError => e # This rescues the exception raised by Game.win? If the move is illegal
       puts e
     end
-    # Now follows a small optimization:
-    if (game.turn >= 5 && game.win?(player: player_turn)) && game.draw == false 
-      # The Game.win? method is not needed If the turn is less than 5
-      # since at that point no win is possible.
+    if game.win?(player: player_turn)
       puts "\n\n#{player_turn_name} won! Game over!\n\n"
       show_board(board: game.game_board)
       game.game_over = true
-    else
+    elsif game.draw?
       puts "\n\n*****A draw has been reached! Run the game again for the rematch.******"
+      game.game_over = true
     end
   end
 end
