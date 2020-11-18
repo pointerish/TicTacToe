@@ -14,7 +14,8 @@ Click [here](https://en.wikipedia.org/wiki/Tic-tac-toe) if you're new to the gam
 ##  Getting Started
 
 - Get the repository by either cloning it or downloading it as a zip file
-- Use your preferred terminal to run it via `ruby main.rb` if you're on Windows or simply `./main.rb` if you're on a POSIX system.
+- Open the `TicTacToe/bin` directory on your terminal
+- Run it via `ruby main.rb` if you're on Windows or simply `./main.rb` if you're on a POSIX system.
 
 ## Authors
 
