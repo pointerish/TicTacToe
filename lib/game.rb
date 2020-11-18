@@ -11,9 +11,13 @@ class Game
     if %w[X O].include?(@game_board.board[move_choice[0]][move_choice[1]]) == false
       @game_board.board[move_choice[0]][move_choice[1]] = player
     else
-      raise 'Your move is illegal since that square is already taken.'
+      raise StandardError.new 'Your move is illegal since that square is already taken.'
     end
     @turn += 1
+  end
+
+  def draw?
+    return false unless @turn == 9
   end
 
   def win?(player:)

@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
@@ -20,14 +21,14 @@ def main_loop(game:, players:)
   while game.game_over == false && game.turn < 9
     player_turn = game.turn.even? ? 'X' : 'O'
     player_turn_name = player_turn == 'X' ? players[0] : players[1]
-    puts '================================='
+    puts "=================================\n\n"
     show_board(board: game.game_board)
     print "\n\nTurn for #{player_turn_name}! Enter your move: "
     while (move_selection = gets.chomp)
       if [1, 2, 3, 4, 5, 6, 7, 8, 9].any? { |j| j.to_s == move_selection }
         break
       else
-        puts 'Please enter a number from 1 to 9 in order to play!'
+        puts "\n*****Please enter a number from 1 to 9 in order to play!******"
         print "Turn for #{player_turn_name}! Enter your move again: "
       end
     end
@@ -35,18 +36,18 @@ def main_loop(game:, players:)
       # Attempt move
       game.move(move_choice: user_keys[move_selection], player: player_turn)
       puts "\n\nYour move selection was #{move_selection}"
-    rescue => e # This rescues the exception raised by Game.win? If the move is illegal
+    rescue StandardError => e # This rescues the exception raised by Game.win? If the move is illegal
       puts e
     end
     # Now follows a small optimization:
-    if game.turn >= 5
+    if (game.turn >= 5 && game.win?(player: player_turn)) && game.draw == false 
       # The Game.win? method is not needed If the turn is less than 5
       # since at that point no win is possible.
-      if game.win?(player: player_turn)
-        puts "\n\n#{player_turn_name} won! Game over!\n\n"
-        show_board(board: game.game_board)
-        game.game_over = true
-      end
+      puts "\n\n#{player_turn_name} won! Game over!\n\n"
+      show_board(board: game.game_board)
+      game.game_over = true
+    else
+      puts "\n\n*****A draw has been reached! Run the game again for the rematch.******"
     end
   end
 end
