@@ -19,7 +19,7 @@ class Game
   end
 
   def draw?
-    return true if @turn == 9
+    @turn < 9 ? false : true
   end
 
   def win?(player:)
