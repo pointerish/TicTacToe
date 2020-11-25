@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :board, :columns, :diagonal, :diagonal_rev
+  attr_accessor :board
 
   def initialize
     @board = Array.new(3) { Array.new(3, '-') }

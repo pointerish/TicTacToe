@@ -2,7 +2,6 @@ require_relative '../lib/game'
 require_relative '../lib/board'
 
 describe Game do
-
   describe '#move' do
     it 'sets the player\'s move on the 2D Board array' do
       game = Game.new(board: Board.new)
@@ -37,7 +36,7 @@ describe Game do
   describe '#win?' do
     it 'returns true when left column is all marked by player X' do
       board = Board.new
-      board.board = [['X','-','-'], ['X','-','-'], ['X','-','-']]
+      board.board = [['X', '-', '-'], ['X', '-', '-'], ['X', '-', '-']]
       game = Game.new(board: board)
       expect(game.win?(player: 'X')).to eql(true)
     end
@@ -46,7 +45,7 @@ describe Game do
   describe '#win?' do
     it 'returns true when middle column is all marked by player X' do
       board = Board.new
-      board.board = [['-','X','-'], ['-','X','-'], ['-','X','-']]
+      board.board = [['-', 'X', '-'], ['-', 'X', '-'], ['-', 'X', '-']]
       game = Game.new(board: board)
       expect(game.win?(player: 'X')).to eql(true)
     end
@@ -55,7 +54,7 @@ describe Game do
   describe '#win?' do
     it 'returns true when right column is all marked by player X' do
       board = Board.new
-      board.board = [['-','-','X'], ['-','-','X'], ['-','-','X']]
+      board.board = [['-', '-', 'X'], ['-', '-', 'X'], ['-', '-', 'X']]
       game = Game.new(board: board)
       expect(game.win?(player: 'X')).to eql(true)
     end
@@ -64,7 +63,7 @@ describe Game do
   describe '#win?' do
     it 'returns true when left-top to right-bottom diagonal is all marked by player X' do
       board = Board.new
-      board.board = [['X','-','-'], ['-','X','-'], ['-','-','X']]
+      board.board = [['X', '-', '-'], ['-', 'X', '-'], ['-', '-', 'X']]
       game = Game.new(board: board)
       expect(game.win?(player: 'X')).to eql(true)
     end
@@ -73,7 +72,7 @@ describe Game do
   describe '#win?' do
     it 'returns true when left-bottom to right-top diagonal is all marked by player X' do
       board = Board.new
-      board.board = [['-','-','X'], ['-','X','-'], ['X','-','-']]
+      board.board = [['-', '-', 'X'], ['-', 'X', '-'], ['X', '-', '-']]
       game = Game.new(board: board)
       expect(game.win?(player: 'X')).to eql(true)
     end

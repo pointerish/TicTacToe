@@ -1,7 +1,6 @@
 require_relative '../lib/board'
 
 describe Board do
-  
   describe '#columns' do
     b = Board.new
     b.board = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
